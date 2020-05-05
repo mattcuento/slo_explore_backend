@@ -1,0 +1,10 @@
+{
+  "devToolsPort": 19006,
+  "expoServerPort": 19000,
+  "packagerPort": 19001,
+  "packagerPid": 46661,
+  "expoServerNgrokUrl": "https://2a-ixm.anonymous.outdoorapp.exp.direct",
+  "packagerNgrokUrl": "https://packager.2a-ixm.anonymous.outdoorapp.exp.direct",
+  "ngrokPid": 46674,
+  "webpackServerPort": 19010
+}

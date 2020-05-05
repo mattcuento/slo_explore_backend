@@ -1,0 +1,35 @@
+{
+  "name": "server",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "nodemon ./bin/www",
+    "client": "cd client && npm start",
+    "dev": "concurrently \"npm start \" \"npm run client\"",
+  },
+  "dependencies": {
+    "axios": "^0.19.2",
+    "body-parser": "^1.19.0",
+    "concurrently": "^5.1.0",
+    "cookie-parser": "~1.4.4",
+    "cors": "^2.8.5",
+    "cypress": "^4.5.0",
+    "debug": "~2.6.9",
+    "dotenv": "^8.2.0",
+    "express": "^4.16.4",
+    "http-errors": "~1.6.3",
+    "jade": "~1.11.0",
+    "jest": "^25.3.0",
+    "mongodb": "^3.5.4",
+    "mongoose": "^5.9.4",
+    "mongoose-auto-increment": "^5.0.1",
+    "more": "^0.1.6",
+    "morgan": "~1.9.1",
+    "nodemon": "^2.0.2",
+    "pug": "^2.0.4"
+  },
+  "description": "this folder called api/ that youre curently in contains all the main workings of the express backend.",
+  "main": "server.js",
+  "author": "",
+  "license": "ISC"
+}
