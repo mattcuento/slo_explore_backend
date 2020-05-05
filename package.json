@@ -3,9 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "nodemon ./bin/www",
-    "client": "cd client && npm start",
-    "dev": "concurrently \"npm start \" \"npm run client\"",
+    "start": "node ./bin/www"
   },
   "dependencies": {
     "axios": "^0.19.2",
