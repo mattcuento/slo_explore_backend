@@ -1,12 +1,12 @@
-var mongoose = require('mongoose');
+var mongoose = require('mongoose')
 
 const UserSchema = mongoose.Schema({
-  email: { 
-    type: String ,
+  email: {
+    type: String,
     required: true
   },
   username: {
-    type : String,
+    type: String,
     required: true
   },
   _locationsSeen: [{
@@ -34,6 +34,6 @@ const UserSchema = mongoose.Schema({
     required: true,
     default: Date.now()
   }
-});
+})
 
-module.exports = mongoose.model('User', UserSchema);
+module.exports = mongoose.model('User', UserSchema)

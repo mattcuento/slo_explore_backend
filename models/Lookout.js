@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+const mongoose = require('mongoose')
 
 const LookoutSchema = mongoose.Schema({
   name: {
@@ -19,10 +19,10 @@ const LookoutSchema = mongoose.Schema({
     default: 0
   },
   sunrise: {
-    type: Date,
+    type: Date
   },
   sunset: {
-    type: Date,
+    type: Date
   },
   _reviews: [{
     type: mongoose.Schema.ObjectId,
@@ -39,6 +39,6 @@ const LookoutSchema = mongoose.Schema({
     required: true,
     default: Date.now()
   }
-});
+})
 
-module.exports = mongoose.model('Lookout', LookoutSchema);
+module.exports = mongoose.model('Lookout', LookoutSchema)

@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+const mongoose = require('mongoose')
 
 const BeachSchema = mongoose.Schema({
   name: {
@@ -8,7 +8,7 @@ const BeachSchema = mongoose.Schema({
   type: {
     type: String,
     required: true,
-    default: "Beach"
+    default: 'Beach'
   },
   coordinates: {
     type: Array,
@@ -43,6 +43,6 @@ const BeachSchema = mongoose.Schema({
     required: true,
     default: Date.now()
   }
-});
+})
 
-module.exports = mongoose.model('Beach', BeachSchema);
+module.exports = mongoose.model('Beach', BeachSchema)
