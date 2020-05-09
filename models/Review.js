@@ -19,10 +19,6 @@ const ReviewSchema = mongoose.Schema({
     type: Number,
     required: true
   },
-  _photos: [{
-    type: mongoose.Schema.ObjectId,
-    ref: 'Photo'
-  }],
   time: {
     type: Date,
     required: true,

@@ -11,6 +11,7 @@ router.get('/beach/all', beachController.get_beaches)
 
 router.get('/location/all', listController.get_all_locations)
 
+router.put('/beach/review/:name', beach_controller.add_review)
 // creating new hike
 router.post('/hike/new', hikeController.create_hike)
 
