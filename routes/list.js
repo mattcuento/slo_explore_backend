@@ -7,6 +7,7 @@ var beach_controller = require('../controllers/BeachController')
 // router.get('/', hike_controller.get_hikes);
 router.get('/', beach_controller.get_beaches)
 
+router.put('/beach/review/:name', beach_controller.add_review)
 // creating new hike
 // router.post('/', hike_controller.create_hike);
 router.post('/', beach_controller.create_beach)

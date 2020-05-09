@@ -17,6 +17,17 @@ exports.create_beach = async function (req, res) {
   }
 }
 
+exports.add_review = async function (req, res) {
+  res.send("here")
+  try {
+    const review = req.body.reviews;
+    const updatedBeach = await Beach.findOneAndUpdate({name: req.params.name}, {$push: {_reviews: review}});
+    res.json(updatedBeach)
+  } catch (error) {
+    res.json({ message: error })
+  }
+}
+
 exports.get_beaches = async function (req, res) {
   try {
     const allBeach = await Beach.find()
