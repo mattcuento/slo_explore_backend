@@ -44,7 +44,7 @@ app.use('/signIn', signInRouter)
 mongoose.connect(process.env.DB_CONNECTION, { useNewUrlParser: true, useUnifiedTopology: true }, () =>
   console.log('connected to DB.')
 ).catch(error =>
-  console.error.bind(console, 'MongoDB connection error: ')
+  console.error.bind(console, 'MongoDB connection error: ' + error)
 )
 
 // catch 404 and forward to error handler

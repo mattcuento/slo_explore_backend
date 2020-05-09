@@ -1,6 +1,6 @@
 // import template for Hikes
 var Hike = require('../models/Hike')
-var mongoose = require('mongoose')
+var Location = require('../models/Location')
 
 exports.create_hike = async function (req, res) {
   const hike = new Hike({
@@ -10,9 +10,15 @@ exports.create_hike = async function (req, res) {
     rating: req.body.rating
   })
 
+  const location = new Location({
+    name: hike.name,
+    type: 'Hike',
+    _refId: hike._id
+  })
   try {
     const savedHike = await hike.save()
-    res.json(savedHike)
+    const savedLoc = await location.save()
+    res.json({ hike: savedHike, location: savedLoc })
   } catch (error) {
     res.json({ message: error })
   }
