@@ -1,20 +1,27 @@
 var express = require('express')
 var router = express.Router()
-var hike_controller = require('../controllers/HikeController')
-var beach_controller = require('../controllers/BeachController')
+var hikeController = require('../controllers/HikeController')
+var beachController = require('../controllers/BeachController')
+var listController = require('../controllers/listController')
 
 // get all hikes
-// router.get('/', hike_controller.get_hikes);
-router.get('/', beach_controller.get_beaches)
+router.get('/hike/all', hikeController.get_hikes)
+
+router.get('/beach/all', beachController.get_beaches)
+
+router.get('/location/all', listController.get_all_locations)
 
 // creating new hike
-// router.post('/', hike_controller.create_hike);
-router.post('/', beach_controller.create_beach)
+router.post('/hike/new', hikeController.create_hike)
 
-router.get('/difficulty/:difficulty', hike_controller.get_hikes_difficulty)
+router.post('/beach/new', beachController.create_beach)
 
-router.get('/rating/:rating', hike_controller.get_hikes_rating)
+router.get('/hike/difficulty/:difficulty', hikeController.get_hikes_difficulty)
 
-router.get('/name/:name', hike_controller.get_hikes_by_name)
+router.get('/hike/rating/:rating', hikeController.get_hikes_rating)
+
+router.get('/hike/name/:name', hikeController.get_hikes_by_name)
+
+router.get('/location/:id', listController.get_location)
 
 module.exports = router
