@@ -29,8 +29,8 @@ exports.add_review = async function (req, res) {
   try {
     console.log(req)
     const savedReview = await review.save()
-    const updatedBeach = await Beach.findOneAndUpdate({name: req.params.name}, {$push: {_reviews: review._id}});
-    res.json({update: updatedBeach, review: savedReview})
+    const updatedBeach = await Beach.findOneAndUpdate({ name: req.params.name }, { $push: { _reviews: review._id } })
+    res.json({ update: updatedBeach, review: savedReview })
   } catch (error) {
     res.json({ message: error })
   }

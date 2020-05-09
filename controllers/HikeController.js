@@ -69,9 +69,8 @@ exports.get_hikes_by_name = async function (req, res) {
 }
 
 exports.add_review = async function (req, res) {
-  
-  try{
-    const location = await Location.find({name: req.params.name})
+  try {
+    const location = await Location.find({ name: req.params.name })
     console.log(location)
     const review = new Review({
       _location: location._id,
@@ -79,17 +78,16 @@ exports.add_review = async function (req, res) {
       description: req.body.description,
       rating: req.body.rating
     })
-    
+
     console.log(review)
     try {
       const savedReview = await review.save()
-      const updatedHike = await Hike.findOneAndUpdate({name: req.params.name}, {$push: {_reviews: review._id}});
-      res.json({update: updatedHike, review: savedReview})
+      const updatedHike = await Hike.findOneAndUpdate({ name: req.params.name }, { $push: { _reviews: review._id } })
+      res.json({ update: updatedHike, review: savedReview })
     } catch (error) {
       res.json({ message: error })
     }
-  }
-  catch (error) {
+  } catch (error) {
     res.json({ message: error })
   }
 }
