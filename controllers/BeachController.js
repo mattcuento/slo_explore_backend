@@ -1,6 +1,7 @@
 // import template for Beaches
-var Beach = require('../models/Beach')
-var Review = require('../models/Review')
+const Beach = require('../models/Beach')
+const Review = require('../models/Review')
+const Location = require('../models/Location')
 
 exports.create_beach = async function (req, res) {
   const beach = new Beach({
@@ -9,9 +10,16 @@ exports.create_beach = async function (req, res) {
     rating: req.body.rating
   })
 
+  const location = new Location({
+    name: beach.name,
+    type: 'Beach',
+    _refId: beach._id
+  })
+
   try {
+    const savedLoc = await location.save()
     const savedBeach = await beach.save()
-    res.json(savedBeach)
+    res.json({ hike: savedBeach, location: savedLoc })
   } catch (error) {
     res.json({ message: error })
   }
