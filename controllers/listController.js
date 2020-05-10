@@ -3,7 +3,6 @@ const Location = require('../models/Location')
 const Beach = require('../models/Beach')
 const Lookout = require('../models/Lookout')
 const ObjectId = require('mongoose').Types.ObjectId
-const hikeController = require('../controllers/HikeController')
 
 exports.get_all_locations = async function (req, res) {
   try {
