@@ -1,6 +1,7 @@
 // import template for Hikes
 var Hike = require('../models/Hike')
 var Location = require('../models/Location')
+var Review = require('../models/Review')
 
 exports.create_hike = async function (req, res) {
   const hike = new Hike({
@@ -62,6 +63,30 @@ exports.get_hikes_by_name = async function (req, res) {
       name: { $regex: name, $options: 'i' }
     }).sort({ name: 1 })
     res.json(hikes)
+  } catch (error) {
+    res.json({ message: error })
+  }
+}
+
+exports.add_review = async function (req, res) {
+  try {
+    const location = await Location.find({ name: req.params.name })
+    console.log(location)
+    const review = new Review({
+      _location: location._id,
+      _user: null,
+      description: req.body.description,
+      rating: req.body.rating
+    })
+
+    console.log(review)
+    try {
+      const savedReview = await review.save()
+      const updatedHike = await Hike.findOneAndUpdate({ name: req.params.name }, { $push: { _reviews: review._id } })
+      res.json({ update: updatedHike, review: savedReview })
+    } catch (error) {
+      res.json({ message: error })
+    }
   } catch (error) {
     res.json({ message: error })
   }

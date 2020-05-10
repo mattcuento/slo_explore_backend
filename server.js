@@ -41,7 +41,7 @@ app.use('/signIn', signInRouter)
 // README here, the express app is stating that it is going to use the designated router signInRouter at the url "/signIn" which for us right now in full would be http://localhost::9000/signIn
 // So, next go to the ./routes folder and open the signIn.js file
 
-mongoose.connect(process.env.DB_CONNECTION, { useNewUrlParser: true, useUnifiedTopology: true }, () =>
+mongoose.connect(process.env.DB_CONNECTION, { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false }, () =>
   console.log('connected to DB.')
 ).catch(error =>
   console.error.bind(console, 'MongoDB connection error: ' + error)
