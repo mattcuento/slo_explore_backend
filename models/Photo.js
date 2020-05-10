@@ -12,7 +12,7 @@ const PhotoSchema = mongoose.Schema({
     required: true
   },
   photo: {
-    type: Binary
+    type: String
     // handle later
   },
   time: {

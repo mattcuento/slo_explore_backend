@@ -1,6 +1,6 @@
 var express = require('express')
 var router = express.Router()
-var user_controller = require('../controllers/UserController')
+var userController = require('../controllers/UserController')
 
 /* GET users listing. */
 router.get('/', function (req, res, next) {
@@ -8,6 +8,6 @@ router.get('/', function (req, res, next) {
 })
 
 // get all users
-router.get('/:username/:email', user_contoller.get_all_users)
+router.get('/:username/:email', userController.get_all_users)
 
 module.exports = router

@@ -1,6 +1,5 @@
 // import template for Users
 var User = require('../models/User')
-var mongoose = require('mongoose')
 
 exports.create_user = async function (req, res) {
   const user = new User({
