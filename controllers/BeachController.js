@@ -1,6 +1,5 @@
 // import template for Beaches
 var Beach = require('../models/Beach')
-var mongoose = require('mongoose')
 var Review = require('../models/Review')
 
 exports.create_beach = async function (req, res) {

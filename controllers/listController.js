@@ -3,6 +3,7 @@ const Location = require('../models/Location')
 const Beach = require('../models/Beach')
 const Lookout = require('../models/Lookout')
 const ObjectId = require('mongoose').Types.ObjectId
+const hikeController = require('../controllers/HikeController')
 
 exports.get_all_locations = async function (req, res) {
   try {
@@ -16,17 +17,17 @@ exports.get_all_locations = async function (req, res) {
 exports.get_location = async function (req, res) {
   const locId = new ObjectId(req.params.id)
   try {
-    let detailLoc = await Location.find({ id: { locId } })
+    let detailLoc = await Location.findById(locId)
     const detailId = detailLoc._refId
     switch (detailLoc.type) {
-      case 'hike':
-        detailLoc = await Hike.find({ id: { detailId } })
+      case 'Hike':
+        detailLoc = await Hike.findById(detailId)
         break
-      case 'beach':
-        detailLoc = await Beach.find({ id: { detailId } })
+      case 'Beach':
+        detailLoc = await Beach.findById(detailId)
         break
-      case 'lookout':
-        detailLoc = await Lookout.find({ id: { detailId } })
+      case 'Lookout':
+        detailLoc = await Lookout.findById(detailId)
         break
       default:
         break
