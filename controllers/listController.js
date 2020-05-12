@@ -13,6 +13,18 @@ exports.get_all_locations = async function (req, res) {
   }
 }
 
+exports.get_all_location_detail = async function (req, res) {
+  try {
+    const hikes = await Hike.find()
+    const beaches = await Beach.find()
+    const lookouts = await Lookout.find()
+    const allLocDetail = hikes.concat(beaches).concat(lookouts)
+    res.json(allLocDetail)
+  } catch (err) {
+    res.json({ message: err })
+  }
+}
+
 exports.get_location = async function (req, res) {
   const locId = new ObjectId(req.params.id)
   try {
