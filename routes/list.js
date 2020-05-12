@@ -9,6 +9,10 @@ router.get('/hike/all', hikeController.get_hikes)
 
 router.get('/beach/all', beachController.get_beaches)
 
+router.get('/beach/name/:name', beachController.get_beaches_by_name)
+
+router.get('/beach/rating/:rating', beachController.get_beaches_rating)
+
 router.get('/location/all', listController.get_all_locations)
 
 router.put('/beach/review/:name', beachController.add_review)
