@@ -7,7 +7,22 @@ router.get('/', function (req, res, next) {
   res.send('respond with a resource')
 })
 
-// get all users
-router.get('/:username/:email', userController.get_all_users)
+// GET all users
+router.get('/all', userController.get_all_users)
+
+// create new user
+router.post('/new', userController.create_user)
+
+// delete a user - testing purposes
+
+// get user by username and email
+//router.get('/:username/:email', userController.get_user)
+
+// get user by username
+// *NOTE* Might need to check for duplicate users
+router.get('/:username', userController.get_user)
+
+// update username
+router.put('/update', userController.update_username)
 
 module.exports = router
