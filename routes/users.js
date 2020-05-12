@@ -13,16 +13,19 @@ router.get('/all', userController.get_all_users)
 // create new user
 router.post('/new', userController.create_user)
 
-// delete a user - testing purposes
-
-// get user by username and email
-//router.get('/:username/:email', userController.get_user)
+// delete a user by username
+router.delete('/delete/:username', userController.delete_user)
 
 // get user by username
-// *NOTE* Might need to check for duplicate users
 router.get('/:username', userController.get_user)
 
 // update username
-router.put('/update', userController.update_username)
+router.put('/update/:username', userController.update_username)
+
+// add new favorite
+router.put('/favorites/add/:username', userController.add_favorite)
+
+// get favorite location
+router.get('/favorites/get/:username', userController.get_favorite)
 
 module.exports = router
