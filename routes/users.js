@@ -10,22 +10,25 @@ router.get('/', function (req, res, next) {
 // GET all users
 router.get('/all', userController.get_all_users)
 
-// create new user
+// CREATE new user
 router.post('/new', userController.create_user)
 
-// delete a user by username
+// DELETE a user by username
 router.delete('/delete/:username', userController.delete_user)
 
-// get user by username
+// GET a user by username
 router.get('/:username', userController.get_user)
 
-// update username
+// Change username
 router.put('/update/:username', userController.update_username)
 
-// add new favorite
+// Add new favorite location
 router.put('/favorites/add/:username', userController.add_favorite)
 
-// get favorite location
-router.get('/favorites/get/:username', userController.get_favorite)
+// Add new location seen, by its name
+router.put('/locationsSeen/add/:username', userController.add_seen_location)
+
+// DELETE a location in favorites, by its name
+router.delete('/favorites/delete/:username', userController.delete_favorite)
 
 module.exports = router

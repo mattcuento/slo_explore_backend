@@ -15,6 +15,7 @@ exports.create_user = async function (req, res) {
   }
 }
 
+// delete a user by username
 exports.delete_user = async function (req, res) {
   try {
     const username = req.params.username
@@ -25,6 +26,7 @@ exports.delete_user = async function (req, res) {
   }
 }
 
+// get a single user by username
 exports.get_user = async function (req, res) {
   try {
     const username = req.body.username
@@ -54,41 +56,35 @@ exports.update_username = async function (req, res) {
   } 
 }
 
-// add new favorite
+// add new favorite by its name
 exports.add_favorite = async function (req, res) {
-  const location = new Location({
-    name: req.body.name,
-    type: req.body.type,
-    //_refId: 77,
-  })
-
   try {
-    const savedLocation = await location.save()
-    const updatedFavorite = await User.findOneAndUpdate({ username: req.params.username }, { $push: {_favorites : location._id}})
-    res.json({ update: updatedFavorite, location: savedLocation })
+    const location = await Location.findOne({name : req.body.name})
+    const updatedFavorite = await User.findOneAndUpdate({ username: req.params.username }, { $addToSet: {_favorites : location._id}})
+    res.json({ update: updatedFavorite, location: location })
   } catch (error) {
     res.json({ message: error })
   } 
 }
 
-// get favorite
-exports.get_favorite = async function (req, res) {
+// add new seen location by its name
+exports.add_seen_location = async function (req, res) {
   try {
-    const username = req.params.username
-    const locationName = req.body.name
-    const location = await User.findOne({username}).findOne({_favorites: locationName})
-    res.json({ locationName : location})
+    const location = await Location.findOne({name : req.body.name})
+    const updatedFavorite = await User.findOneAndUpdate({ username: req.params.username }, { $addToSet: {_locationsSeen : location._id}})
+    res.json({ update: updatedFavorite, location: location })
   } catch (error) {
     res.json({ message: error })
   } 
 }
 
-// remove favorite
-/*exports.delete_favorite = async function (req, res) {
+// delete a location in favorites by its name
+exports.delete_favorite = async function (req, res) {
   try {
-    const 
-    res.json({ })
+    const location = await Location.findOne({name : req.body.name})
+    const user = await User.findOneAndUpdate({ username: req.params.username }, { $pull: {_favorites : location._id}})
+    res.json({ user: user, location: location})
   } catch (error) {
     res.json({ message: error })
   } 
-}*/
+}
