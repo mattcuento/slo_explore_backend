@@ -9,10 +9,10 @@ const LocationSchema = mongoose.Schema({
     type: String,
     required: true
   },
-  _refId: {
+  /*_refId: {
     type: mongoose.Schema.Types.ObjectId,
     required: true
-  }
+  }*/
 })
 
 module.exports = mongoose.model('Location', LocationSchema)
