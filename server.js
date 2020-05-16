@@ -6,6 +6,7 @@ var bodyParser = require('body-parser')
 var logger = require('morgan')
 var mongoose = require('mongoose')
 var cors = require('cors')
+const multer = require('multer')
 require('dotenv/config')
 
 // TO START THE APP, WRTIE 'npm start' ANYWHERE UNDER THE 'api' FOLDER AND GO TO http://localhost:9000
