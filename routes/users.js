@@ -10,4 +10,6 @@ router.get('/', function (req, res, next) {
 // get all users
 router.get('/:username/:email', userController.get_all_users)
 
+router.get('/logout', userController.logout)
+
 module.exports = router
