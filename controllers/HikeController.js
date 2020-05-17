@@ -72,7 +72,6 @@ exports.get_hikes_by_name = async function (req, res) {
 exports.add_review = async function (req, res) {
   try {
     const location = await Location.findOne({ name: req.params.name })
-    console.log(location)
     const review = new Review({
       _location: location._id,
       _user: null,
@@ -80,7 +79,6 @@ exports.add_review = async function (req, res) {
       rating: req.body.rating
     })
 
-    console.log(review)
     try {
       const savedReview = await review.save()
       const updatedHike = await Hike.findOneAndUpdate({ name: req.params.name }, { $push: { _reviews: review._id } })

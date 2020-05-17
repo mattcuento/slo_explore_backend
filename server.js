@@ -21,6 +21,7 @@ var mapViewRouter = require('./routes/map')
 var listViewRouter = require('./routes/list')
 var signInRouter = require('./routes/signIn')
 var registerRouter = require('./routes/register')
+var userRouter = require('./routes/users')
 // README this variable is the express app itself
 var app = express()
 
@@ -50,6 +51,7 @@ app.use('/profile', profileRouter)
 app.use('/list', listViewRouter)
 app.use('/map', mapViewRouter)
 app.use('/signIn', signInRouter)
+app.use('/users', userRouter)
 // README here, the express app is stating that it is going to use the designated router signInRouter at the url "/signIn" which for us right now in full would be http://localhost::9000/signIn
 // So, next go to the ./routes folder and open the signIn.js file
 
