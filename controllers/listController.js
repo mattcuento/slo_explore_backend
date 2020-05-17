@@ -13,20 +13,32 @@ exports.get_all_locations = async function (req, res) {
   }
 }
 
+exports.get_all_location_detail = async function (req, res) {
+  try {
+    const hikes = await Hike.find()
+    const beaches = await Beach.find()
+    const lookouts = await Lookout.find()
+    const allLocDetail = hikes.concat(beaches).concat(lookouts)
+    res.json(allLocDetail)
+  } catch (err) {
+    res.json({ message: err })
+  }
+}
+
 exports.get_location = async function (req, res) {
   const locId = new ObjectId(req.params.id)
   try {
-    let detailLoc = await Location.find({ id: { locId } })
+    let detailLoc = await Location.findById(locId)
     const detailId = detailLoc._refId
     switch (detailLoc.type) {
-      case 'hike':
-        detailLoc = await Hike.find({ id: { detailId } })
+      case 'Hike':
+        detailLoc = await Hike.findById(detailId)
         break
-      case 'beach':
-        detailLoc = await Beach.find({ id: { detailId } })
+      case 'Beach':
+        detailLoc = await Beach.findById(detailId)
         break
-      case 'lookout':
-        detailLoc = await Lookout.find({ id: { detailId } })
+      case 'Lookout':
+        detailLoc = await Lookout.findById(detailId)
         break
       default:
         break
