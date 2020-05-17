@@ -1,13 +1,7 @@
 // import template for Beaches
-<<<<<<< HEAD
-var Beach = require('../models/Beach')
-var Review = require('../models/Review')
-var Location = require('../models/Location')
-=======
 const Beach = require('../models/Beach')
 const Review = require('../models/Review')
 const Location = require('../models/Location')
->>>>>>> c80f3140a574c1b82490659a71f10b9321e6f80b
 
 exports.create_beach = async function (req, res) {
   const beach = new Beach({
