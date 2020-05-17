@@ -8,8 +8,8 @@ var userController = require('../controllers/UserController')
 //   res.send('NEW ACCOUNT');
 // });
 
-router.get('/', userController.get_all_users)
+router.get('/', userController.getAllUsers)
 
-router.post('/', userController.create_user)
+router.post('/', userController.createUser)
 
 module.exports = router
