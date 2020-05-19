@@ -31,4 +31,6 @@ router.put('/locationsSeen/add/:username', userController.addSeenLocation)
 // DELETE a location in favorites, by its name
 router.delete('/favorites/delete/:username', userController.deleteFavorite)
 
+router.get('/logout', userController.logout)
+
 module.exports = router

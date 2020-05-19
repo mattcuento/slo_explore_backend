@@ -3,10 +3,11 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node ./bin/www"
+    "start": "nodemon ./bin/www"
   },
   "dependencies": {
     "axios": "^0.19.2",
+    "bcrypt": "^4.0.1",
     "body-parser": "^1.19.0",
     "concurrently": "^5.1.0",
     "cookie-parser": "~1.4.4",
@@ -15,6 +16,7 @@
     "debug": "~2.6.9",
     "dotenv": "^8.2.0",
     "express": "^4.16.4",
+    "express-session": "^1.17.1",
     "http-errors": "~1.6.3",
     "jade": "~1.11.0",
     "jest": "^25.3.0",
@@ -23,7 +25,10 @@
     "mongoose-auto-increment": "^5.0.1",
     "more": "^0.1.6",
     "morgan": "~1.9.1",
+    "multer": "^1.4.2",
     "nodemon": "^2.0.2",
+    "passport": "^0.4.1",
+    "passport-local": "^1.0.0",
     "pug": "^2.0.4"
   },
   "description": "this folder called api/ that youre curently in contains all the main workings of the express backend.",

@@ -6,6 +6,10 @@ var bodyParser = require('body-parser')
 var logger = require('morgan')
 var mongoose = require('mongoose')
 var cors = require('cors')
+const session = require('express-session')
+const passport = require('passport')
+
+require('./config/passport')(passport)
 require('dotenv/config')
 
 // TO START THE APP, WRTIE 'npm start' ANYWHERE UNDER THE 'api' FOLDER AND GO TO http://localhost:9000
@@ -31,6 +35,14 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
 app.use(cookieParser())
 app.use(express.static(path.join(__dirname, 'public')))
+app.use(session({
+  secret: 'secret',
+  resave: true,
+  saveUninitialized: true,
+  cookie: { secure: true }
+}))
+app.use(passport.initialize())
+app.use(passport.session())
 
 app.use('/', signInRouter)
 app.use('/tracker', trackerRouter)

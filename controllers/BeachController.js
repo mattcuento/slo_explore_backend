@@ -21,7 +21,7 @@ exports.create_beach = async function (req, res) {
     const savedBeach = await beach.save()
     res.json({ hike: savedBeach, location: savedLoc })
   } catch (error) {
-    res.json({ message: error })
+    res.status(500).json({ message: error })
   }
 }
 
@@ -65,7 +65,7 @@ exports.add_review = async function (req, res) {
       res.json({ message: error })
     }
   } catch (error) {
-    res.json({ message: error })
+    res.status(500).json({ message: error })
   }
 }
 
@@ -74,6 +74,6 @@ exports.get_beaches = async function (req, res) {
     const allBeach = await Beach.find()
     res.json(allBeach)
   } catch (error) {
-    res.json({ message: error })
+    res.status(500).json({ message: error })
   }
 }
