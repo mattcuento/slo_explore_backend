@@ -9,11 +9,11 @@ const PhotoSchema = mongoose.Schema({
   _user: {
     type: mongoose.Schema.ObjectId,
     ref: 'User',
-    required: true
+    required: false
   },
   photo: {
-    type: String
-    // handle later
+    type: String,
+    required: true
   },
   time: {
     type: Date,

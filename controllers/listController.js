@@ -9,7 +9,24 @@ exports.get_all_locations = async function (req, res) {
     const allLocs = await Location.find()
     res.json(allLocs)
   } catch (error) {
-    res.json({ message: error })
+    res.status(500).json({ message: error })
+  }
+}
+
+exports.get_all_location_detail = async function (req, res) {
+  try {
+    await Hike.find()
+      .then(hikes => {
+        Beach.find()
+          .then(beaches => {
+            Lookout.find()
+              .then(lookouts => {
+                res.json(hikes.concat(beaches).concat(lookouts))
+              })
+          })
+      })
+  } catch (err) {
+    res.status(500).json({ message: err })
   }
 }
 
@@ -33,6 +50,6 @@ exports.get_location = async function (req, res) {
     }
     res.json(detailLoc)
   } catch (error) {
-    res.json({ message: error })
+    res.status(500).json({ message: error })
   }
 }

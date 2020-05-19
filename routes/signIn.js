@@ -8,6 +8,8 @@ var userController = require('../controllers/UserController')
 // });
 
 // get single user
-router.get('/', userController.get_user)
+router.get('/', userController.getUser)
+
+router.post('/', userController.login)
 
 module.exports = router

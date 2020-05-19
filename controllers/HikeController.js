@@ -2,6 +2,7 @@
 var Hike = require('../models/Hike')
 var Location = require('../models/Location')
 var Review = require('../models/Review')
+const Photo = require('../models/Photo')
 
 exports.create_hike = async function (req, res) {
   const hike = new Hike({
@@ -21,7 +22,7 @@ exports.create_hike = async function (req, res) {
     const savedLoc = await location.save()
     res.json({ hike: savedHike, location: savedLoc })
   } catch (error) {
-    res.json({ message: error })
+    res.status(500).json({ message: error })
   }
 }
 
@@ -30,7 +31,7 @@ exports.get_hikes = async function (req, res) {
     const allHikes = await Hike.find()
     res.json(allHikes)
   } catch (error) {
-    res.json({ message: error })
+    res.status(500).json({ message: error })
   }
 }
 
@@ -40,7 +41,7 @@ exports.get_hikes_rating = async function (req, res) {
     const hikes = await Hike.find({ rating }).sort({ rating: -1 })
     res.json(hikes)
   } catch (error) {
-    res.json({ message: error })
+    res.status(500).json({ message: error })
   }
 }
 
@@ -52,7 +53,7 @@ exports.get_hikes_difficulty = async function (req, res) {
     })
     res.json(hikes)
   } catch (error) {
-    res.json({ message: error })
+    res.status(500).json({ message: error })
   }
 }
 
@@ -64,14 +65,13 @@ exports.get_hikes_by_name = async function (req, res) {
     }).sort({ name: 1 })
     res.json(hikes)
   } catch (error) {
-    res.json({ message: error })
+    res.status(500).json({ message: error })
   }
 }
 
 exports.add_review = async function (req, res) {
   try {
-    const location = await Location.find({ name: req.params.name })
-    console.log(location)
+    const location = await Location.findOne({ name: req.params.name })
     const review = new Review({
       _location: location._id,
       _user: null,
@@ -79,15 +79,34 @@ exports.add_review = async function (req, res) {
       rating: req.body.rating
     })
 
-    console.log(review)
     try {
       const savedReview = await review.save()
       const updatedHike = await Hike.findOneAndUpdate({ name: req.params.name }, { $push: { _reviews: review._id } })
       res.json({ update: updatedHike, review: savedReview })
     } catch (error) {
-      res.json({ message: error })
+      res.status(500).json({ message: error })
     }
   } catch (error) {
-    res.json({ message: error })
+    res.status(500).json({ message: error })
+  }
+}
+
+exports.add_photo = async function (req, res) {
+  try {
+    const location = await Location.findOne({ name: req.params.name })
+    const photo = new Photo({
+      _location: location._id,
+      _user: null,
+      photo: req.file.path
+    })
+    try {
+      const savedPhoto = await photo.save()
+      const updatedHike = await Hike.findOneAndUpdate({ name: req.params.name }, { $push: { _photos: photo._id } })
+      res.json({ update: updatedHike, photo: savedPhoto })
+    } catch (error) {
+      res.status(500).json({ message: error })
+    }
+  } catch (error) {
+    res.status(500).json({ message: error })
   }
 }
