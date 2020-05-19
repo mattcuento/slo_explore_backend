@@ -15,7 +15,7 @@ exports.get_all_locations = async function (req, res) {
 
 exports.get_all_location_detail = async function (req, res) {
   try {
-    const array = await Hike.find()
+    await Hike.find()
       .then(hikes => {
         Beach.find()
           .then(beaches => {
