@@ -96,7 +96,7 @@ exports.logout = function (req, res) {
   req.logout()
   return true
 }
-    
+
 exports.updateUsername = async function (req, res) {
   try {
     const newUserName = req.body.username
