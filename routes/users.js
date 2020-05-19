@@ -11,7 +11,7 @@ router.get('/', function (req, res, next) {
 router.get('/all', userController.getAllUsers)
 
 // CREATE new user
-router.post('/new', userController.createUser)
+router.post('/new', userController.create_user)
 
 // DELETE a user by username
 router.delete('/delete/:username', userController.deleteUser)
