@@ -15,11 +15,16 @@ exports.get_all_locations = async function (req, res) {
 
 exports.get_all_location_detail = async function (req, res) {
   try {
-    const hikes = await Hike.find()
-    const beaches = await Beach.find()
-    const lookouts = await Lookout.find()
-    const allLocDetail = hikes.concat(beaches).concat(lookouts)
-    res.json(allLocDetail)
+    const array = await Hike.find()
+      .then(hikes => {
+        Beach.find()
+          .then(beaches => {
+            Lookout.find()
+              .then(lookouts => {
+                res.json(hikes.concat(beaches).concat(lookouts))
+              })
+          })
+      })
   } catch (err) {
     res.status(500).json({ message: err })
   }
