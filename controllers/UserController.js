@@ -56,17 +56,6 @@ exports.createUser = async function (req, res) {
   }
 }
 
-// delete a user by username
-exports.deleteUser = async function (req, res) {
-  try {
-    const username = req.params.name
-    const deletedUser = await User.findOneAndDelete({ username })
-    res.json({ deletedUser: deletedUser })
-  } catch (error) {
-    res.json({ message: error })
-  }
-}
-
 // get a single user by username
 exports.getUser = async function (req, res) {
   try {
@@ -142,6 +131,17 @@ exports.deleteFavorite = async function (req, res) {
     const location = await Location.findOne({ name: req.body.name })
     const user = await User.findOneAndUpdate({ name: req.params.name }, { $pull: { _favorites: location._id } })
     res.json({ user: user, location: location })
+  } catch (error) {
+    res.json({ message: error })
+  }
+}
+
+// delete a user by username
+exports.deleteUser = async function (req, res) {
+  try {
+    const username = req.params.name
+    const deletedUser = await User.findOneAndDelete({ username })
+    res.json({ deletedUser: deletedUser })
   } catch (error) {
     res.json({ message: error })
   }

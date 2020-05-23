@@ -9,6 +9,11 @@ const LookoutSchema = mongoose.Schema({
     type: Array,
     required: true
   },
+  type: {
+    type: String,
+    required: true,
+    default: 'Lookout'
+  },
   description: {
     type: String,
     required: true

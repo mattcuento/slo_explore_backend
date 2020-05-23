@@ -1,56 +1,57 @@
-// import template for Beaches
-const Beach = require('../models/Beach')
+// import template for Lookout
+const Lookout = require('../models/Lookout')
 const Review = require('../models/Review')
 const Location = require('../models/Location')
 const Photo = require('../models/Photo')
 
-exports.createBeach = async function (req, res) {
-  const beach = new Beach({
+exports.createLookout = async function (req, res) {
+  const lookout = new Lookout({
     name: req.body.name,
     description: req.body.description,
     rating: req.body.rating
   })
 
   const location = new Location({
-    name: beach.name,
-    type: 'Beach',
-    _refId: beach._id
+    name: lookout.name,
+    type: 'Lookout',
+    _refId: lookout._id
   })
 
   try {
     const savedLoc = await location.save()
-    const savedBeach = await beach.save()
-    res.json({ beach: savedBeach, location: savedLoc })
-  } catch (error) {
-    res.status(500).json({ message: error })
-  }
-}
-exports.getBeaches = async function (req, res) {
-  try {
-    const allBeach = await Beach.find()
-    res.json(allBeach)
+    const savedLookout = await lookout.save()
+    res.json({ lookout: savedLookout, location: savedLoc })
   } catch (error) {
     res.status(500).json({ message: error })
   }
 }
 
-exports.getBeachesRating = async function (req, res) {
+exports.getLookouts = async function (req, res) {
+  try {
+    const allLookouts = await Lookout.find()
+    res.json(allLookouts)
+  } catch (error) {
+    res.status(500).json({ message: error })
+  }
+}
+
+exports.getLookoutRating = async function (req, res) {
   try {
     const rating = req.params.rating
-    const beaches = await Beach.find({ rating }).sort({ rating: -1 })
-    res.json(beaches)
+    const lookouts= await Lookout.find({ rating }).sort({ rating: -1 })
+    res.json(lookouts)
   } catch (error) {
     res.json({ message: error })
   }
 }
 
-exports.getBeachesByName = async function (req, res) {
+exports.getLookoutByName = async function (req, res) {
   try {
     const name = req.params.name
-    const beaches = await Beach.find({
+    const lookouts = await Lookout.find({
       name: { $regex: name, $options: 'i' }
     }).sort({ name: 1 })
-    res.json(beaches)
+    res.json(lookouts)
   } catch (error) {
     res.json({ message: error })
   }
@@ -68,8 +69,8 @@ exports.addReview = async function (req, res) {
 
     try {
       const savedReview = await review.save()
-      const updatedBeach = await Beach.findOneAndUpdate({ name: req.params.name }, { $push: { _reviews: review._id } })
-      res.json({ update: updatedBeach, review: savedReview })
+      const updatedLookout = await Lookout.findOneAndUpdate({ name: req.params.name }, { $push: { _reviews: review._id } })
+      res.json({ update: updatedLookout, review: savedReview })
     } catch (error) {
       res.json({ message: error })
     }
@@ -88,8 +89,8 @@ exports.addPhoto = async function (req, res) {
     })
     try {
       const savedPhoto = await photo.save()
-      const updatedBeach = await Beach.findOneAndUpdate({ name: req.params.name }, { $push: { _photos: photo._id } })
-      res.json({ update: updatedBeach, photo: savedPhoto })
+      const updatedLookout = await Lookout.findOneAndUpdate({ name: req.params.name }, { $push: { _photos: photo._id } })
+      res.json({ update: updatedLookout, photo: savedPhoto })
     } catch (error) {
       res.status(500).json({ message: error })
     }
