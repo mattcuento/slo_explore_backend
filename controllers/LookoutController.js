@@ -38,7 +38,7 @@ exports.getLookouts = async function (req, res) {
 exports.getLookoutRating = async function (req, res) {
   try {
     const rating = req.params.rating
-    const lookouts= await Lookout.find({ rating }).sort({ rating: -1 })
+    const lookouts = await Lookout.find({ rating }).sort({ rating: -1 })
     res.json(lookouts)
   } catch (error) {
     res.json({ message: error })
