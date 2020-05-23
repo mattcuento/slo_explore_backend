@@ -4,14 +4,16 @@ var Location = require('../models/Location')
 const bcrypt = require('bcrypt')
 const passport = require('passport')
 
-exports.create_user = async function (req, res) {
+exports.createUser = async function (req, res) {
+  console.log('made it to createUser')
   const { name, email, password, password2 } = req.body
   const errors = []
 
   if (!name || !email || !password || !password2) {
     errors.push({ msg: 'Please fill in all fields' })
   }
-
+  console.log(password)
+  console.log(password2)
   if (password !== password2) {
     errors.push({ msg: 'Passwords do not match' })
   }
@@ -21,6 +23,7 @@ exports.create_user = async function (req, res) {
   }
 
   if (errors.length > 0) {
+    console.log('here in errors')
     res.json(errors)
   } else {
     const user = new User({
@@ -33,15 +36,19 @@ exports.create_user = async function (req, res) {
     bcrypt.genSalt(10, (err, salt) =>
       bcrypt.hash(user.password, salt, async (err, hash) => {
         if (err) {
+          console.log('made it here')
           res.status(500).json({ message: err })
         } else {
           user.password = hash
+          console.log(user.password)
           try {
             const savedUser = await user.save()
-              .then(user => {
+              .then(savedUser => {
                 res.json({ user: savedUser })
               })
+            console.log(savedUser)
           } catch (error) {
+            console.log('made it further')
             res.status(500).json({ message: error })
           }
         }
@@ -52,7 +59,7 @@ exports.create_user = async function (req, res) {
 // delete a user by username
 exports.deleteUser = async function (req, res) {
   try {
-    const username = req.params.username
+    const username = req.params.name
     const deletedUser = await User.findOneAndDelete({ username })
     res.json({ deletedUser: deletedUser })
   } catch (error) {
@@ -63,8 +70,8 @@ exports.deleteUser = async function (req, res) {
 // get a single user by username
 exports.getUser = async function (req, res) {
   try {
-    const username = req.body.username
-    const user = await User.findOne({ username })
+    const username = req.body.name
+    const user = await User.findOne({ name: username })
     res.json(user)
   } catch (error) {
     res.status(500).json({ message: error })
@@ -99,9 +106,9 @@ exports.logout = function (req, res) {
 
 exports.updateUsername = async function (req, res) {
   try {
-    const newUserName = req.body.username
-    const updatedUser = await User.findOneAndUpdate({ username: req.params.username }, { $set: { username: newUserName } })
-    res.json({ update: updatedUser, username: newUserName })
+    const newUserName = req.body.name
+    const updatedUser = await User.findOneAndUpdate({ name: req.params.name }, { $set: { name: newUserName } })
+    res.json({ update: updatedUser, name: newUserName })
   } catch (error) {
     res.json({ message: error })
   }
@@ -111,7 +118,7 @@ exports.updateUsername = async function (req, res) {
 exports.addFavorite = async function (req, res) {
   try {
     const location = await Location.findOne({ name: req.body.name })
-    const updatedFavorite = await User.findOneAndUpdate({ username: req.params.username }, { $addToSet: { _favorites: location._id } })
+    const updatedFavorite = await User.findOneAndUpdate({ name: req.params.username }, { $addToSet: { _favorites: location._id } })
     res.json({ update: updatedFavorite, location: location })
   } catch (error) {
     res.json({ message: error })
@@ -122,7 +129,7 @@ exports.addFavorite = async function (req, res) {
 exports.addSeenLocation = async function (req, res) {
   try {
     const location = await Location.findOne({ name: req.body.name })
-    const updatedFavorite = await User.findOneAndUpdate({ username: req.params.username }, { $addToSet: { _locationsSeen: location._id } })
+    const updatedFavorite = await User.findOneAndUpdate({ name: req.params.name }, { $addToSet: { _locationsSeen: location._id } })
     res.json({ update: updatedFavorite, location: location })
   } catch (error) {
     res.json({ message: error })
@@ -133,7 +140,7 @@ exports.addSeenLocation = async function (req, res) {
 exports.deleteFavorite = async function (req, res) {
   try {
     const location = await Location.findOne({ name: req.body.name })
-    const user = await User.findOneAndUpdate({ username: req.params.username }, { $pull: { _favorites: location._id } })
+    const user = await User.findOneAndUpdate({ name: req.params.name }, { $pull: { _favorites: location._id } })
     res.json({ user: user, location: location })
   } catch (error) {
     res.json({ message: error })
