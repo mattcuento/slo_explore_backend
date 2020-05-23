@@ -17,7 +17,7 @@ router.post('/new', userController.createUser)
 router.delete('/delete/:username', userController.deleteUser)
 
 // GET a user by username
-router.get('/:username', userController.getUser)
+router.get('/one', userController.getUser)
 
 // Change username
 router.put('/update/:username', userController.updateUsername)
