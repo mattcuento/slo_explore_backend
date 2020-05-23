@@ -4,7 +4,7 @@ var Location = require('../models/Location')
 var Review = require('../models/Review')
 const Photo = require('../models/Photo')
 
-exports.create_hike = async function (req, res) {
+exports.createHike = async function (req, res) {
   const hike = new Hike({
     name: req.body.name,
     description: req.body.description,
@@ -26,7 +26,7 @@ exports.create_hike = async function (req, res) {
   }
 }
 
-exports.get_hikes = async function (req, res) {
+exports.getHikes = async function (req, res) {
   try {
     const allHikes = await Hike.find()
     res.json(allHikes)
@@ -35,7 +35,7 @@ exports.get_hikes = async function (req, res) {
   }
 }
 
-exports.get_hikes_rating = async function (req, res) {
+exports.getHikesRating = async function (req, res) {
   try {
     const rating = req.params.rating
     const hikes = await Hike.find({ rating }).sort({ rating: -1 })
@@ -45,7 +45,7 @@ exports.get_hikes_rating = async function (req, res) {
   }
 }
 
-exports.get_hikes_difficulty = async function (req, res) {
+exports.getHikesDifficulty = async function (req, res) {
   try {
     const diff = req.params.difficulty
     const hikes = await Hike.find({ difficulty: diff }).sort({
@@ -57,7 +57,7 @@ exports.get_hikes_difficulty = async function (req, res) {
   }
 }
 
-exports.get_hikes_by_name = async function (req, res) {
+exports.getHikesByName = async function (req, res) {
   try {
     const name = req.params.name
     const hikes = await Hike.find({
@@ -69,7 +69,7 @@ exports.get_hikes_by_name = async function (req, res) {
   }
 }
 
-exports.add_review = async function (req, res) {
+exports.addReview = async function (req, res) {
   try {
     const location = await Location.findOne({ name: req.params.name })
     const review = new Review({
@@ -91,7 +91,7 @@ exports.add_review = async function (req, res) {
   }
 }
 
-exports.add_photo = async function (req, res) {
+exports.addPhoto = async function (req, res) {
   try {
     const location = await Location.findOne({ name: req.params.name })
     const photo = new Photo({

@@ -4,7 +4,7 @@ const Beach = require('../models/Beach')
 const Lookout = require('../models/Lookout')
 const ObjectId = require('mongoose').Types.ObjectId
 
-exports.get_all_locations = async function (req, res) {
+exports.getAllLocations = async function (req, res) {
   try {
     const allLocs = await Location.find()
     res.json(allLocs)
@@ -13,7 +13,7 @@ exports.get_all_locations = async function (req, res) {
   }
 }
 
-exports.get_all_location_detail = async function (req, res) {
+exports.getAllLocationDetail = async function (req, res) {
   try {
     await Hike.find()
       .then(hikes => {
@@ -30,7 +30,7 @@ exports.get_all_location_detail = async function (req, res) {
   }
 }
 
-exports.get_location = async function (req, res) {
+exports.getLocation = async function (req, res) {
   const locId = new ObjectId(req.params.id)
   try {
     let detailLoc = await Location.findById(locId)
