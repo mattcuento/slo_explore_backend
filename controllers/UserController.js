@@ -107,7 +107,7 @@ exports.updateUsername = async function (req, res) {
 exports.addFavorite = async function (req, res) {
   try {
     const location = await Location.findOne({ name: req.body.name })
-    const updatedFavorite = await User.findOneAndUpdate({ name: req.params.username }, { $addToSet: { _favorites: location._id } })
+    const updatedFavorite = await User.findOneAndUpdate({ name: req.params.name }, { $addToSet: { _favorites: location._id } })
     res.json({ update: updatedFavorite, location: location })
   } catch (error) {
     res.json({ message: error })
