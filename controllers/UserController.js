@@ -5,15 +5,13 @@ const bcrypt = require('bcrypt')
 const passport = require('passport')
 
 exports.createUser = async function (req, res) {
-  console.log('made it to createUser')
   const { name, email, password, password2 } = req.body
   const errors = []
 
   if (!name || !email || !password || !password2) {
     errors.push({ msg: 'Please fill in all fields' })
   }
-  console.log(password)
-  console.log(password2)
+
   if (password !== password2) {
     errors.push({ msg: 'Passwords do not match' })
   }
@@ -23,7 +21,6 @@ exports.createUser = async function (req, res) {
   }
 
   if (errors.length > 0) {
-    console.log('here in errors')
     res.json(errors)
   } else {
     const user = new User({
@@ -36,11 +33,9 @@ exports.createUser = async function (req, res) {
     bcrypt.genSalt(10, (err, salt) =>
       bcrypt.hash(user.password, salt, async (err, hash) => {
         if (err) {
-          console.log('made it here')
           res.status(500).json({ message: err })
         } else {
           user.password = hash
-          console.log(user.password)
           try {
             const savedUser = await user.save()
               .then(savedUser => {
@@ -48,7 +43,6 @@ exports.createUser = async function (req, res) {
               })
             console.log(savedUser)
           } catch (error) {
-            console.log('made it further')
             res.status(500).json({ message: error })
           }
         }
