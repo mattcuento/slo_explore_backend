@@ -101,8 +101,9 @@ exports.addPhoto = async function (req, res) {
     })
     try {
       const savedPhoto = await photo.save()
-      const updatedHike = await Hike.findOneAndUpdate({ name: req.params.name }, { $push: { _photos: photo._id } })
-      res.json({ update: updatedHike, photo: savedPhoto })
+      await Hike.findOneAndUpdate({ name: req.params.name }, { $push: { _photos: photo._id } })
+        .then(result => res.json({ update: result, photo: savedPhoto }))
+        .catch(err => res.status(500).json({ message: err }))
     } catch (error) {
       res.status(500).json({ message: error })
     }
