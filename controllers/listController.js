@@ -32,18 +32,18 @@ exports.getAllLocationDetail = async function (req, res) {
 
 exports.getLocation = async function (req, res) {
   const locId = new ObjectId(req.params.id)
+  const type = req.params.type
   try {
-    let detailLoc = await Location.findById(locId)
-    const detailId = detailLoc._refId
-    switch (detailLoc.type) {
+    let detailLoc = null
+    switch (type) {
       case 'Hike':
-        detailLoc = await Hike.findById(detailId)
+        detailLoc = await Hike.findById(locId)
         break
       case 'Beach':
-        detailLoc = await Beach.findById(detailId)
+        detailLoc = await Beach.findById(locId)
         break
       case 'Lookout':
-        detailLoc = await Lookout.findById(detailId)
+        detailLoc = await Lookout.findById(locId)
         break
       default:
         break

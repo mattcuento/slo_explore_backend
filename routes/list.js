@@ -70,7 +70,7 @@ router.get('/location/all', listController.getAllLocations)
 
 router.get('/location/all/detail', listController.getAllLocationDetail)
 
-router.get('/location/:id', listController.getLocation)
+router.get('/location/:id/:type', listController.getLocation)
 
 // router.get('/hike/photo/all')
 
