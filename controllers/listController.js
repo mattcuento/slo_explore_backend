@@ -1,6 +1,7 @@
 const Hike = require('../models/Hike')
 const Location = require('../models/Location')
 const Beach = require('../models/Beach')
+const Review = require('../models/Review')
 const Lookout = require('../models/Lookout')
 const ObjectId = require('mongoose').Types.ObjectId
 
@@ -51,5 +52,15 @@ exports.getLocation = async function (req, res) {
     res.json(detailLoc)
   } catch (error) {
     res.status(500).json({ message: error })
+  }
+}
+
+exports.getReviews = async function (req, res) {
+  const reviewIds = req.body.reviewIds
+  try {
+    const reviews = await Review.find().where('_id').in(reviewIds).exec()
+    res.json(reviews)
+  } catch (err) {
+    res.status(500).json({ message: err })
   }
 }
