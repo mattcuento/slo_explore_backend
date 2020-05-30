@@ -72,6 +72,8 @@ router.get('/location/all/detail', listController.getAllLocationDetail)
 
 router.get('/location/:id/:type', listController.getLocation)
 
+router.post('/review', listController.getReviews)
+
 // router.get('/hike/photo/all')
 
 // router.delete('/hike/photo/delete')
