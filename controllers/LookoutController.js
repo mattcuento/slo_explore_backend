@@ -98,3 +98,12 @@ exports.addPhoto = async function (req, res) {
     res.status(500).json({ message: error })
   }
 }
+
+exports.addCoordinates = async function (req, res) {
+  try {
+    const updatedLookout = await Lookout.findOneAndUpdate({ name: req.params.name }, { $set: { coordinates: [req.body.title, req.body.index, req.body.latitude, req.body.longitude] } })
+    res.json({ update: updatedLookout })
+  } catch (error) {
+    res.json({ message: error })
+  }
+}

@@ -12,7 +12,7 @@ const BeachSchema = mongoose.Schema({
   },
   coordinates: {
     type: Array,
-    required: true
+    required: false
   },
   description: {
     type: String,
