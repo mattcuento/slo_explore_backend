@@ -53,7 +53,8 @@ exports.createUser = async function (req, res) {
 // get a single user by username
 exports.getUser = async function (req, res) {
   try {
-    const username = req.body.name
+    const username = req.params.name
+    console.log(req.body.name)
     const user = await User.findOne({ name: username })
     res.json(user)
   } catch (error) {
