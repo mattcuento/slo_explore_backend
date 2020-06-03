@@ -35,6 +35,8 @@ router.post('/beach/new', beachController.createBeach)
 
 router.post('/beach/:name/photo/add', upload.single('location_photo'), beachController.addPhoto)
 
+router.post('/beach/coordinates/:name', beachController.addCoordinates)
+
 // Hike routes
 router.get('/hike/all', hikeController.getHikes)
 
@@ -50,6 +52,8 @@ router.get('/hike/name/:name', hikeController.getHikesByName)
 
 router.post('/hike/:name/photo/add', upload.single('location_photo'), hikeController.addPhoto)
 
+router.post('/hike/coordinates/:name', hikeController.addCoordinates)
+
 // Lookout routes
 
 router.get('/lookout/all', lookoutController.getLookouts)
@@ -63,6 +67,8 @@ router.put('/lookout/review/:name', lookoutController.addReview)
 router.post('/lookout/new', lookoutController.createLookout)
 
 router.post('/lookout/:name/photo/add', upload.single('location_photo'), lookoutController.addPhoto)
+
+router.post('/lookout/coordinates/:name', lookoutController.addCoordinates)
 
 // List controller routes
 
