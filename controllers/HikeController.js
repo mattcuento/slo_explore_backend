@@ -71,8 +71,11 @@ exports.getHikesByName = async function (req, res) {
 }
 
 exports.addReview = async function (req, res) {
+  console.log('name: ' + req.params.name)
   try {
-    const location = await Location.findOne({ name: req.params.name })
+    const location = await Location.findOne({ name: req.params.name }).then(
+      data => console.log('location: ' + location)
+    )
     const review = new Review({
       _location: location._id,
       _user: null,
@@ -80,8 +83,10 @@ exports.addReview = async function (req, res) {
       rating: req.body.rating
     })
 
+    console.log('review: ' + review)
     try {
       const savedReview = await review.save()
+      console.log('savedreview: ' + savedReview)
       const updatedHike = await Hike.findOneAndUpdate({ name: req.params.name }, { $push: { _reviews: review._id } })
       res.json({ update: updatedHike, review: savedReview })
     } catch (error) {
