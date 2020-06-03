@@ -8,6 +8,7 @@ exports.createBeach = async function (req, res) {
   const beach = new Beach({
     name: req.body.name,
     description: req.body.description,
+    coordinates: req.body.coordinates,
     rating: req.body.rating
   })
 

@@ -9,6 +9,7 @@ exports.createHike = async function (req, res) {
     name: req.body.name,
     description: req.body.description,
     difficulty: req.body.difficulty,
+    coordinates: req.body.coordinates,
     rating: req.body.rating
   })
 

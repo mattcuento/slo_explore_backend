@@ -8,6 +8,7 @@ exports.createLookout = async function (req, res) {
   const lookout = new Lookout({
     name: req.body.name,
     description: req.body.description,
+    coordinates: req.body.coordinates,
     rating: req.body.rating
   })
 
