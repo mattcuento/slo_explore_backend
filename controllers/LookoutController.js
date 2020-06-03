@@ -86,7 +86,7 @@ exports.addPhoto = async function (req, res) {
     const photo = new Photo({
       _location: location._id,
       _user: null,
-      photo: req.file.path
+      photo: 'https://slo-explore-308.herokuapp.com/' + req.file.filename
     })
     try {
       const savedPhoto = await photo.save()
