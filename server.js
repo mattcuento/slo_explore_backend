@@ -27,7 +27,7 @@ var app = express()
 
 // view engine setup
 // TODO switch to react
-
+app.use(express.static('uploads'))
 app.use(logger('dev'))
 app.use(cors())
 app.use(bodyParser.json())
