@@ -89,7 +89,7 @@ exports.addPhoto = async function (req, res) {
     })
     try {
       const savedPhoto = await photo.save()
-      const updatedBeach = await Beach.findOneAndUpdate({ name: req.params.name }, { $push: { _photos: photo._id } })
+      const updatedBeach = await Beach.findOneAndUpdate({ name: req.params.name }, { $push: { _photos: photo.photo } })
       res.json({ update: updatedBeach, photo: savedPhoto })
     } catch (error) {
       res.status(500).json({ message: error })

@@ -90,7 +90,7 @@ exports.addPhoto = async function (req, res) {
     })
     try {
       const savedPhoto = await photo.save()
-      const updatedLookout = await Lookout.findOneAndUpdate({ name: req.params.name }, { $push: { _photos: photo._id } })
+      const updatedLookout = await Lookout.findOneAndUpdate({ name: req.params.name }, { $push: { _photos: photo.photo } })
       res.json({ update: updatedLookout, photo: savedPhoto })
     } catch (error) {
       res.status(500).json({ message: error })

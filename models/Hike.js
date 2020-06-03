@@ -34,8 +34,7 @@ const HikeSchema = mongoose.Schema({
     required: false
   }],
   _photos: [{
-    type: mongoose.Schema.ObjectId,
-    ref: 'Photo',
+    type: String,
     required: false
   }],
   time: {
