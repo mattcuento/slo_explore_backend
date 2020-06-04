@@ -56,6 +56,7 @@ exports.getLocation = async function (req, res) {
 }
 
 exports.getReviews = async function (req, res) {
+  console.log(req.body)
   const reviewIds = req.body.reviewIds
   try {
     const reviews = await Review.find().where('_id').in(reviewIds).exec()

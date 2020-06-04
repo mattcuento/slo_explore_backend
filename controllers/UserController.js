@@ -15,7 +15,6 @@ exports.createUser = async function (req, res) {
   if (password !== password2) {
     errors.push({ msg: 'Passwords do not match' })
   }
-
   if (password.length < 6) {
     errors.push({ msg: 'Password should be at least 6 characters' })
   }
@@ -37,11 +36,10 @@ exports.createUser = async function (req, res) {
         } else {
           user.password = hash
           try {
-            const savedUser = await user.save()
+            await user.save()
               .then(savedUser => {
                 res.json({ user: savedUser })
               })
-            console.log(savedUser)
           } catch (error) {
             res.status(500).json({ message: error })
           }
@@ -54,7 +52,6 @@ exports.createUser = async function (req, res) {
 exports.getUser = async function (req, res) {
   try {
     const username = req.params.name
-    console.log(req.body.name)
     const user = await User.findOne({ name: username })
     res.json(user)
   } catch (error) {
@@ -69,18 +66,6 @@ exports.getAllUsers = async function (req, res) {
   } catch (error) {
     res.status(500).json({ message: error })
   }
-}
-
-exports.login = function (req, res, next) {
-  // check return of this function for redirection?
-  // TODO
-  res.send(
-    passport.authenticate('local', {
-      successRedirect: '/list',
-      failureRedirect: '/signIn/',
-      failureFlash: false
-    })(req, res, next)
-  )
 }
 
 exports.logout = function (req, res) {
