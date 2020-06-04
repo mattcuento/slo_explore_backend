@@ -2,7 +2,6 @@
 var User = require('../models/User')
 var Location = require('../models/Location')
 const bcrypt = require('bcrypt')
-const passport = require('passport')
 
 exports.createUser = async function (req, res) {
   const { name, email, password, password2 } = req.body
