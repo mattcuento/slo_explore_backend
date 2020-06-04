@@ -5,10 +5,8 @@ const server = require('../../../server')
 const request = require('supertest')(server)
 const ExUser = require('../../fixtures/exUser.json')
 const BadUser = require('../../fixtures/badUser.json')
-const ExHike = require('../../fixtures/exHike.json')
-const ExReview = require('../../fixtures/exReview.json')
 const BadReview = require('../../fixtures/badReview.json')
-const BadHike = require('../../fixtures/badHike.json')
+
 describe('User creation API', () => {
   const user = ExUser
   it('should create user', (done) => {
