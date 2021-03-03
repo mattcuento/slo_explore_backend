@@ -30,7 +30,7 @@
     "nodemon": "^2.0.2",
     "passport": "^0.4.1",
     "passport-local": "^1.0.0",
-    "pug": "^2.0.4"
+    "pug": "^3.0.1"
   },
   "description": "this folder called api/ that youre curently in contains all the main workings of the express backend.",
   "main": "server.js",
